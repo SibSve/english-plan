@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>My English Plan</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F7F4EF;
+    --surface: #FFFFFF;
+    --border: #E8E2D9;
+    --text: #1A1714;
+    --muted: #8A8278;
+    --gram: #4A3F8C;
+    --gram-bg: #EEEAF8;
+    --vocab: #1A6B50;
+    --vocab-bg: #E2F5EC;
+    --pron: #8C4A0E;
+    --pron-bg: #FDF0E4;
+    --mix: #1A4F6B;
+    --mix-bg: #E2EFF5;
+    --check: #1A6B50;
+    --radius: 12px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding-bottom: 40px;
+  }
+
+  header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 20px 20px 16px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+  }
+
+  .progress-bar-wrap {
+    margin-top: 10px;
+    background: var(--border);
+    border-radius: 99px;
+    height: 5px;
+    overflow: hidden;
+  }
+
+  .progress-bar-fill {
+    height: 100%;
+    background: var(--check);
+    border-radius: 99px;
+    transition: width 0.4s ease;
+  }
+
+  .progress-label {
+    margin-top: 6px;
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .week-nav {
+    display: flex;
+    gap: 8px;
+    padding: 14px 20px 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .week-nav::-webkit-scrollbar { display: none; }
+
+  .week-btn {
+    flex-shrink: 0;
+    padding: 7px 16px;
+    border-radius: 99px;
+    border: 1.5px solid var(--border);
+    background: var(--surface);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .week-btn.active {
+    background: var(--text);
+    border-color: var(--text);
+    color: #fff;
+  }
+
+  .container {
+    padding: 16px 20px;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .week-section { display: none; }
+  .week-section.active { display: block; }
+
+  .week-label {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 14px;
+    margin-top: 4px;
+  }
+
+  .sub-block { margin-bottom: 20px; }
+
+  .sub-title {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--muted);
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .day-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin-bottom: 8px;
+  }
+
+  .day-row {
+    display: flex;
+    align-items: flex-start;
+    padding: 13px 14px;
+    border-bottom: 1px solid var(--border);
+    gap: 12px;
+    cursor: pointer;
+    transition: background 0.15s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .day-row:last-child { border-bottom: none; }
+  .day-row:active { background: var(--bg); }
+  .day-row.done { opacity: 0.5; }
+  .day-row.done .topic-name { text-decoration: line-through; }
+
+  .day-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    min-width: 44px;
+    padding-top: 1px;
+  }
+
+  .day-name {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--muted);
+    text-align: center;
+  }
+
+  .day-tag {
+    font-size: 9px;
+    font-weight: 500;
+    padding: 2px 6px;
+    border-radius: 99px;
+    text-align: center;
+    line-height: 1.3;
+  }
+  .tg-gram { background: var(--gram-bg); color: var(--gram); }
+  .tg-vocab { background: var(--vocab-bg); color: var(--vocab); }
+  .tg-pron { background: var(--pron-bg); color: var(--pron); }
+  .tg-mix { background: var(--mix-bg); color: var(--mix); }
+
+  .day-content { flex: 1; min-width: 0; }
+
+  .topic-name {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.3;
+    margin-bottom: 3px;
+  }
+
+  .topic-desc {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.4;
+    margin-bottom: 6px;
+  }
+
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+
+  .lnk {
+    font-size: 11px;
+    padding: 3px 9px;
+    border-radius: 99px;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .lnk-blue { background: #E6F1FB; color: #185FA5; }
+  .lnk-green { background: var(--vocab-bg); color: var(--vocab); }
+  .lnk-amber { background: var(--pron-bg); color: var(--pron); }
+
+  .checkbox {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 2px solid var(--border);
+    flex-shrink: 0;
+    margin-top: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+  }
+  .day-row.done .checkbox {
+    background: var(--check);
+    border-color: var(--check);
+  }
+  .checkbox-tick {
+    display: none;
+    width: 12px;
+    height: 12px;
+  }
+  .day-row.done .checkbox-tick { display: block; }
+
+  .week-progress {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 14px;
+  }
+  .week-progress span { color: var(--text); font-weight: 500; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>My English Plan 🇬🇧</h1>
+  <div class="progress-bar-wrap">
+    <div class="progress-bar-fill" id="globalBar" style="width:0%"></div>
+  </div>
+  <div class="progress-label" id="globalLabel">0 из 56 дней выполнено</div>
+</header>
+
+<div class="week-nav">
+  <button class="week-btn active" onclick="showWeek(0,this)">Нед. 1а</button>
+  <button class="week-btn" onclick="showWeek(1,this)">Нед. 1б</button>
+  <button class="week-btn" onclick="showWeek(2,this)">Нед. 2а</button>
+  <button class="week-btn" onclick="showWeek(3,this)">Нед. 2б</button>
+  <button class="week-btn" onclick="showWeek(4,this)">Нед. 3а</button>
+  <button class="week-btn" onclick="showWeek(5,this)">Нед. 3б</button>
+  <button class="week-btn" onclick="showWeek(6,this)">Нед. 4а</button>
+  <button class="week-btn" onclick="showWeek(7,this)">Нед. 4б</button>
+</div>
+
+<div class="container">
+
+<!-- НЕДЕЛЯ 1а -->
+<div class="week-section active" id="week-0">
+  <p class="week-label">Неделя 1 — Present Perfect &amp; Past</p>
+  <p class="week-progress" id="wp-0"></p>
+  <div class="day-card">
+    <div class="day-row" onclick="toggle(this)" id="d-0-0">
+      <div class="day-left"><span class="day-name">Пн</span><span class="day-tag tg-gram">грамм.</span></div>
+      <div class="day-content">
+        <p class="topic-name">Present Perfect vs Past Simple</p>
+        <p class="topic-desc">already/just/ever/never → Perfect; конкретное время → Simple</p>
+        <div class="links">
+          <a class="lnk lnk-blue" href="https://www.perfect-english-grammar.com/present-perfect.html" target="_blank">Объяснение</a>
+          <a class="lnk lnk-blue" href="https://www.perfect-english-grammar.com/present-perfect-exercise-1.html" target="_blank">Упражнение 1</a>
+          <a class="lnk lnk-blue" href="https://www.perfect-english-grammar.com/present-perfect-or-past-simple-exercise-1.html" target="_blank">Perfect vs Simple</a>
+        </div>
+      </div>
+      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </div>
+    <div class="day-row" onclick="toggle(this)" id="d-0-1">
+      <div class="day-left"><span class="day-name">Вт</span><span class="day-tag tg-vocab">словарь</span></div>
+      <div class="day-content">
+        <p class="topic-name">10 слов: действия и события</p>
+        <p class="topic-desc">Quizlet: найди сет "B1 actions &amp; events", учи через карточки</p>
+        <div class="links">
+          <a class="lnk lnk-green" href="https://quizlet.com/search?query=b1+vocabulary+actions&type=sets" target="_blank">Quizlet → сет</a>
+        </div>
+      </div>
+      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </div>
+    <div class="day-row" onclick="toggle(this)" id="d-0-2">
+      <div class="day-left"><span class="day-name">Ср</span><span class="day-tag tg-pron">произн.</span></div>
+      <div class="day-content">
+        <p class="topic-name">Слова недели на YouGlish</p>
+        <p class="topic-desc">Введи 3–4 слова из вторника, смотри видео с носителями, повтори вслух</p>
+        <div class="links">
+          <a class="lnk lnk-amber" href="https://youglish.com" target="_blank">YouGlish</a>
+          <a class="lnk lnk-amber" href="https://ru.forvo.com" target="_blank">Forvo</a>
+        </div>
+      </div>
+      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </div>
+    <div class="day-row" onclick="toggle(this)" id="d-0-3">
+      <div class="day-left"><span class="day-name">Чт</span><span class="day-tag tg-gram">грамм.</span></div>
+      <div class="day-content">
+        <p class="topic-name">Present Perfect Continuous</p>
+        <p class="topic-desc">I've been waiting — процесс, который ещё продолжается</p>
+        <div class="links">
+          <a class="lnk lnk-blue" href="https://www.perfect-english-grammar.com/present-perfect-continuous.html" target="_blank">Объяснение</a>
+          <a class="lnk lnk-blue" href="https://www.perfect-english-grammar.com/present-perfect-continuous-exercise-1.html" target="_blank">Упражнение</a>
+          <a class="lnk lnk-blue" href="https://www.perfect-english-grammar.com/present-perfect-simple-or-continuous-1.html" target="_blank">Simple vs Continuous</a>
+        </div>
+      </div>
+      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </div>
+    <div class="day-row" onclick="toggle(this)" id="d-0-4">
+      <div class="day-left"><span class="day-name">Пт</span><span class="day-tag tg-vocab">словарь</span></div>
+      <div class="day-content">
+        <p class="topic-name">Повторение + контекст слов</p>
+        <p class="topic-desc">Quizlet: режим «Тест». Потом 5 слов в реальных предложениях на Reverso</p>
+        <div class="links">
+          <a class="lnk lnk-green" href="https://quizlet.com" target="_blank">Quizlet — тест</a>
+          <a class="lnk lnk-green" href="https://context.reverso.net" target="_blank">Reverso Context</a>
+        </div>
+      </div>
+      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </div>
+    <div class="day-row" onclick="toggle(this)" id="d-0-5">
+      <div class="day-left"><span class="day-name">Сб</span><span class="day-tag tg-pron">произн.</span></div>
+      <div class="day-content">
+        <p class="topic-name">Произношение всех слов недели</p>
+        <p class="topic-desc">Forvo: прослушай все 10 слов от носителей, проверь ударения</p>
+        <div class="links">
+          <a class="lnk lnk-amber" href="https://ru.forvo.com" target="_blank">Forvo</a>
+        </div>
+      </div>
+      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </div>
+    <div class="day-row" onclick="toggle(this)" id="d-0-6">
+      <div class="day-left"><span class="day-name">Вс</span><span class="day-tag tg-mix">повтор.</span></div>
+      <div class="day-content">
+        <p class="topic-name">Мини-итог недели</p>
+        <p class="topic-desc">Вспомни 2 правила. Quizlet: финальный прогон. Произнеси 3 своих предложения вслух</p>
+        <div class="links">
+          <a class="lnk lnk-green" href="https://quizlet.com" target="_blank">Quizlet — финал</a>
+        </div>
+      </div>
+      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </div>
+  </div>
+</div>
+
+<!-- НЕДЕЛЯ 1б -->
+<div class="week-section" id="week-1">
+  <p class="week-label">Неделя 1 — Past времена</p>
+  <p class="week-progress" id="wp-1"></p>
+  <div class="day-card">
+    <div class="day-row" onclick="toggle(this)" id="d-1-0">
+      <div class="day-left"><span class="day-name">Пн</span><span class="day-tag tg-gram">грамм.</span></div>
+      <div class="day-content">
+        <p class="topic-name">Past Simple vs Past Continuous</p>
+        <p class="topic-desc">I was cooking when he called — фон vs действие</p>
+        <div class="links">
+          <a class="lnk lnk-blue" href="https://www.perfect-english-grammar.com/past-continuous.html" target="_blank">Объяснение</a>
+          <a class="lnk lnk-blue" href="https://www.perfect-english-grammar.com/past-simple-or-past-continuous-exercise-1.html" target="_blank">Упражнение</a>
+        </div>
+      </div>
+      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </div>
+    <div class="day-row" onclick="toggle(this)" id="d-1-1">
+      <div class="day-left"><span class="day-name">Вт</span><span class="day-tag tg-vocab">словарь</span></div>
+      <div class="day-content">
+        <p class="topic-name">10 слов: черты характера</p>
+        <p class="topic-desc">Quizlet: сет "personality adjectives B1"</p>
+        <div class="links">
+          <a class="lnk lnk-green" href="https://quizlet.com/search?query=personality+adjectives+b1&type=sets" target="_blank">Quizlet → сет</a>
+        </div>
+      </div>
+      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </div>
+    <div class="day-row" onclick="toggle(this)" id="d-1-2">
+      <div class="day-left"><span class="day-name">Ср</span><span class="day-tag tg-pron">произн.</span></div>
+      <div class="day-content">
+        <p class="topic-name">Shadowing: прилагательные характера</p>
+        <p class="topic-desc">YouGlish: ambitious, reliable, stubborn — как произносят в речи</p>
+        <div class="links">
+          <a class="lnk lnk-amber" href="https://youglish.com" target="_blank">YouGlish</a>
+        </div>
+      </div>
+      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </div>
+    <div class="day-row" onclick="toggle(this)" id="d-1-3">
+      <div class="day-left"><span class="day-name">Чт</span><span class="day-tag tg-gram">грамм.</span></div>
+      <div class="day-content">
+        <p class="topic-name">Past Perfect</p>
+        <p class="topic-desc">She had left before I arrived — что случилось раньше из двух прошлых</p>
+        <div class="links">
+          <a class="lnk lnk-blue" href="https://www.perfect-english-grammar.com/past-perfect.html" target="_blank">Объяснение</a>
+          <a class="lnk lnk-blue" href="https://www.perfect-english-grammar.com/past-perfect-exercise-1.html" target="_blank">Упражнение 1</a>
+          <a class="lnk lnk-blue" href="https://www.perfect-english-grammar.com/past-perfect-exercise-2.html" target="_blank">Упражнение 2</a>
+        </div>
+      </div>
+      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </div>
+    <div class="day-row" onclick="toggle(this)" id="d-1-4">
+      <div class="day-left"><span class="day-name">Пт</span><span class="day-tag tg-vocab">словарь</span></div>
+      <div class="day-content">
+        <p class="topic-name">Повторение + Reverso</p>
+        <p class="topic-desc">Тест по словам характера, затем 5 слов в контексте</p>
+        <div class="links">
+          <a class="lnk lnk-green" href="https://quizlet.com" target="_blank">Quizlet — тест</a>
+          <a class="lnk lnk-green" href="https://context.reverso.net" target="_blank">Reverso Context</a>
+        </div>
+      </div>
+      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </div>
+    <div class="day-row" onclick="toggle(this)" id="d-1-5">
+      <div class="day-left"><span class="day-name">Сб</span><span class="day-tag tg-pron">произн.</span></div>
+      <div class="day-content">
+        <p class="topic-name">Forvo + запись себя</p>
+        <p class="topic-desc">Прослушай все 10 слов, запиши себя на телефон, сравни с оригиналом</p>
+        <div class="links">
+          <a class="lnk lnk-amber" href="https://ru.forvo.com" target="_blank">Forvo</a>
+        </div>
+      </div>
+      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </div>
+    <div class="day-row" onclick="toggle(this)" id="d-1-6">
+      <div class="day-left"><span class="day-name">Вс</span><span class="day-tag tg-mix">повтор.</span></div>
+      <div class="day-content">
+        <p class="topic-name">Итог: Past времена</p>
+        <p class="topic-desc">3 предложения о прошлой неделе, используя Simple, Continuous и Perfect</p>
+        <div class="links">
+          <a class="lnk lnk-green" href="https://quizlet.com" target="_blank">Quizlet — финал</a>
+        </div>
+      </div>
+      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </div>
+  </div>
+</div>
+
+<!-- НЕДЕЛЯ 2а -->
+<div class="week-section" id="week-2">
+  <p class="week-label">Неделя 2 — Conditionals</p>
+  <p class="week-progress" id="wp-2"></p>
+  <div class="day-card">
+    <div class="day-row" onclick="toggle(this)" id="d-2-0">
+      <div class="day-left"><span class="day-name">Пн</span><span class="day-tag tg-gram">грамм.</span></div>
+      <div class="day-content">
+        <p class="topic-name">Zero &amp; First Conditional</p>
+        <p class="topic-desc">If it rains, I stay (0) / I'll stay (1) — реальные условия</p>
+        <div class="links">
+          <a class="lnk lnk-blue" href="https://www.perfect-english-grammar.com/zero-conditional.html" target="_blank">Zero</a>
+          <a class="lnk lnk-blue" href="https://www.perfect-english-grammar.com/first-conditional.html" target="_blank">First</a>
+          <a class="lnk lnk-blue" href="https://www.perfect-english-grammar.com/zero-and-first-conditional-exercise.html" target="_blank">Упражнение</a>
+        </div>
+      </div>
+      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </div>
+    <div class="day-row" onclick="toggle(this)" id="d-2-1">
+      <div class="day-left"><span class="day-name">Вт</span><span class="day-tag tg-vocab">словарь</span></div>
+      <div class="day-content">
+        <p class="topic-name">10 слов: работа и карьера</p>
+        <p class="topic-desc">Quizlet: сет "work career vocabulary B1/B2"</p>
+        <div class="links">
+          <a class="lnk lnk-green" href="https://quizlet.com/search?query=work+career+vocabulary+b1&type=sets" target="_blank">Quizlet → сет</a>
+        </div>
+      </div>
+      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </div>
+    <div class="day-row" onclick="toggle(this)" id="d-2-2">
+      <div class="day-left"><span class="day-name">Ср</span><span class="day-tag tg-pron">произн.</span></div>
+      <div class="day-content">
+        <p class="topic-name">Интонация в условных предложениях</p>
+        <p class="topic-desc">YouGlish: "if I were you" — слушай паузу между частями</p>
+        <div class="links">
+          <a class="lnk lnk-amber" href="https://youglish.com" target="_blank">YouGlish</a>
+        </div>
+      </div>
+      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </div>
+    <div class="day-row" onclick="toggle(this)" id="d-2-3">
+      <div class="day-left"><span class="day-name">Чт</span><span class="day-tag tg-gram">грамм.</span></div>
+      <div class="day-content">
+        <p class="topic-name">Second &amp; Third Conditional</p>
+        <p class="topic-desc">If I were you... / If I had known... — гипотетические ситуации</p>
+        <div class="links">
+          <a class="lnk lnk-blue" href="https://www.perfect-english-grammar.com/second-conditional.html" target="_blank">Second</a>
+          <a class="lnk lnk-blue" href="https://www.perfect-english-grammar.com/third-conditional.html" target="_blank">Third</a>
+          <a class="lnk lnk-blue" href="https://www.perfect-english-grammar.com/second-conditional-exercise-1.html" target="_blank">Упр. 2nd</a>
+          <a class="lnk lnk-blue" href="https://www.perfect-english-grammar.com/third-conditional-exercise-1.html" target="_blank">Упр. 3rd</a>
+        </div>
+      </div>
+      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </div>
+    <div class="day-row" onclick="toggle(this)" id="d-2-4">
+      <div class="day-left"><span class="day-name">Пт</span><span class="day-tag tg-vocab">словарь</span></div>
+      <div class="day-content">
+        <p class="topic-name">Повторение + Reverso</p>
+        <p class="topic-desc">Тест по словам работы/карьеры, 5 слов в контексте</p>
+        <div class="links">
+          <a class="lnk lnk-green" href="https://quizlet.com" target="_blank">Quizlet — тест</a>
+          <a class="lnk lnk-green" href="https://context.reverso.net" target="_blank">Reverso Context</a>
+        </div>
+      </div>
+      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </div>
+    <div class="day-row" onclick="toggle(this)" id="d-2-5">
+      <div class="day-left"><span class="day-name">Сб</span><span class="day-tag tg-pron">произн.</span></div>
+      <div class="day-content">
+        <p class="topic-name">Слова недели на Forvo</p>
+        <p class="topic-desc">Все 10 слов, повтори вслух по 3 раза, обрати внимание на ударение</p>
+        <div class="links">
+          <a class="lnk lnk-amber" href="https://ru.forvo.com" target="_blank">Forvo</a>
+        </div>
+      </div>
+      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </div>
+    <div class="day-row" onclick="toggle(this)" id="d-2-6">
+      <div class="day-left"><span class="day-name">Вс</span><span class="day-tag tg-mix">повтор.</span></div>
+      <div class="day-content">
+        <p class="topic-name">Итог: Conditionals</p>
+        <p class="topic-desc">По 1 предложению каждого типа (0–3) о своей жизни. Quizlet: финал слов</p>
+        <div class="links">
+          <a class="lnk lnk-green" href="https://quizlet.com" target="_blank">Quizlet — финал</a>
+        </div>
+      </div>
+      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </div>
+  </div>
+</div>
+
+<!-- НЕДЕЛЯ 2б -->
+<div class="week-section" id="week-3">
+  <p class="week-label">Неделя 2 — Модальные глаголы</p>
+  <p class="week-progress" id="wp-3"></p>
+  <div class="day-card">
+    <div class="day-row" onclick="toggle(this)" id="d-3-0">
+      <div class="day-left"><span class="day-name">Пн</span><span class="day-tag tg-gram">грамм.</span></div>
+      <div class="day-content">
+        <p class="topic-name">Must / Have to / Should</p>
+        <p class="topic-desc">Обязательство, необходимость, совет — в чём разница</p>
+        <div class="links">
+          <a class="lnk lnk-blue" href="https://www.perfect-english-grammar.com/must-have-to.html" target="_blank">Must vs Have to</a>
+          <a class="lnk lnk-blue" href="https://www.perfect-english-grammar.com/should.html" target="_blank">Should</a>
+          <a class="lnk lnk-blue" href="https://www.perfect-english-grammar.com/modal-verbs-exercise-1.html" target="_blank">Упражнение</a>
+        </div>
+      </div>
+      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </div>
+    <div class="day-row" onclick="toggle(this)" id="d-3-1">
+      <div class="day-left"><span class="day-name">Вт</span><span class="day-tag tg-vocab">словарь</span></div>
+      <div class="day-content">
+        <p class="topic-name">10 слов: эмоции и состояния</p>
+        <p class="topic-desc">Quizlet: сет "emotions feelings vocabulary B1"</p>
+        <div class="links">
+          <a class="lnk lnk-green" href="https://quizlet.com/search?query=emotions+feelings+b1&type=sets" target="_blank">Quizlet → сет</a>
+        </div>
+      </div>
+      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </div>
+    <div class="day-row" onclick="toggle(this)" id="d-3-2">
+      <div class="day-left"><span class="day-name">Ср</span><span class="day-tag tg-pron">произн.</span></div>
+      <div class="day-content">
+        <p class="topic-name">Редуцированные модальные</p>
+        <p class="topic-desc">YouGlish: "should have" — слушай, как сокращается в беглой речи</p>
+        <div class="links">
+          <a class="lnk lnk-amber" href="https://youglish.com" target="_blank">YouGlish</a>
+        </div>
+      </div>
+      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </div>
+    <div class="day-row" onclick="toggle(this)" id="d-3-3">
+      <div class="day-left"><span class="day-name">Чт</span><span class="day-tag tg-gram">грамм.</span></div>
+      <div class="day-content">
+        <p class="topic-name">Modal + have + V3</p>
+        <p class="topic-desc">She must have forgotten / could have called — домыслы о прошлом</p>
+        <div class="links">
+          <a class="lnk lnk-blue" href="https://www.perfect-english-grammar.com/modal-verbs-for-the-past.html" target="_blank">Объяснение</a>
+          <a class="lnk lnk-blue" href="https://www.perfect-english-grammar.com/modal-verbs-for-the-past-exercise-1.html" target="_blank">Упражнение 1</a>
+          <a class="lnk lnk-blue" href="https://www.perfect-english-grammar.com/modal-verbs-for-the-past-exercise-2.html" target="_blank">Упражнение 2</a>
+        </div>
+      </div>
+      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </div>
+    <div class="day-row" onclick="toggle(this)" id="d-3-4">
+      <div class="day-left"><span class="day-name">Пт</span><span class="day-tag tg-vocab">словарь</span></div>
+      <div class="day-content">
+        <p class="topic-name">Повторение + Reverso</p>
+        <p class="topic-desc">Тест по словам эмоций, 5 слов в контексте</p>
+        <div class="links">
+          <a class="lnk lnk-green" href="https://quizlet.com" target="_blank">Quizlet — тест</a>
+          <a class="lnk lnk-green" href="https://context.reverso.net" target="_blank">Reverso Context</a>
+        </div>
+      </div>
+      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </div>
+    <div class="day-row" onclick="toggle(this)" id="d-3-5">
+      <div class="day-left"><span class="day-name">Сб</span><span class="day-tag tg-pron">произн.</span></div>
+      <div class="day-content">
+        <p class="topic-name">Слова эмоций на Forvo</p>
+        <p class="topic-desc">Все 10 слов. Особое внимание: frustrated, relieved, overwhelmed</p>
+        <div class="links">
+          <a class="lnk lnk-amber" href="https://ru.forvo.com" target="_blank">Forvo</a>
+        </div>
+      </div>
+      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </div>
+    <div class="day-row" onclick="toggle(this)" id="d-3-6">
+      <div class="day-left"><span class="day-name">Вс</span><span class="day-tag tg-mix">повтор.</span></div>
+      <div class="day-content">
+        <p class="topic-name">Итог: модальные глаголы</p>
+        <p class="topic-desc">3 предложения с must have / could have / should have. Quizlet: финал</p>
+        <div class="links">
+          <a class="lnk lnk-green" href="https://quizlet.com" target="_blank">Quizlet — финал</a>
+        </div>
+      </div>
+      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </div>
+  </div>
+</div>
+
+<!-- НЕДЕЛЯ 3а -->
+<div class="week-section" id="week-4">
+  <p class="week-label">Неделя 3 — Passive Voice</p>
+  <p class="week-progress" id="wp-4"></p>
+  <div class="day-card">
+    <div class="day-row" onclick="toggle(this)" id="d-4-0">
+      <div class="day-left"><span class="day-name">Пн</span><span class="day-tag tg-gram">грамм.</span></div>
+      <div class="day-content">
+        <p class="topic-name">Passive: Present &amp; Past</p>
+        <p class="topic-desc">It is made / was made / has been made — страдательный залог</p>
+        <div class="links">
+          <a class="lnk lnk-blue" href="https://www.perfect-english-grammar.com/passive.html" target="_blank">Объяснение</a>
+          <a class="lnk lnk-blue" href="https://www.perfect-english-grammar.com/passive-voice-exercise-1.html" target="_blank">Упражнение 1</a>
+          <a class="lnk lnk-blue" href="https://www.perfect-english-grammar.com/passive-voice-exercise-2.html" target="_blank">Упражнение 2</a>
+        </div>
+      </div>
+      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </div>
+    <div class="day-row" onclick="toggle(this)" id="d-4-1">
+      <div class="day-left"><span class="day-name">Вт</span><span class="day-tag tg-vocab">словарь</span></div>
+      <div class="day-content">
+        <p class="topic-name">10 слов: технологии и интернет</p>
+        <p class="topic-desc">Quizlet: сет "technology internet vocabulary B2"</p>
+        <div class="links">
+          <a class="lnk lnk-green" href="https://quizlet.com/search?query=technology+internet+vocabulary+b2&type=sets" target="_blank">Quizlet → сет</a>
+        </div>
+      </div>
+      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </div>
+    <div class="day-row" onclick="toggle(this)" id="d-4-2">
+      <div class="day-left"><span class="day-name">Ср</span><span class="day-tag tg-pron">произн.</span></div>
+      <div class="day-content">
+        <p class="topic-name">Слова технологий на YouGlish</p>
+        <p class="topic-desc">algorithm, data, privacy — как произносят в реальных видео</p>
+        <div class="links">
+          <a class="lnk lnk-amber" href="https://youglish.com" target="_blank">YouGlish</a>
+        </div>
+      </div>
+      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </div>
+    <div class="day-row" onclick="toggle(this)" id="d-4-3">
+      <div class="day-left"><span class="day-name">Чт</span><span class="day-tag tg-gram">грамм.</span></div>
+      <div class="day-content">
+        <p class="topic-name">Passive: Future &amp; Modal</p>
+        <p class="topic-desc">It will be done / should be checked / might be delayed</p>
+        <div class="links">
+          <a class="lnk lnk-blue" href="https://www.perfect-english-grammar.com/passive-voice-exercise-3.html" target="_blank">Упражнение 3</a>
+          <a class="lnk lnk-blue" href="https://www.perfect-english-grammar.com/passive-voice-exercise-4.html" target="_blank">Упражнение 4</a>
+        </div>
+      </div>
+      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </div>
+    <div class="day-row" onclick="toggle(this)" id="d-4-4">
+      <div class="day-left"><span class="day-name">Пт</span><span class="day-tag tg-vocab">словарь</span></div>
+      <div class="day-content">
+        <p class="topic-name">Повторение + Reverso</p>
+        <p class="topic-desc">Тест в Quizlet, 5 технологических слов на Reverso</p>
+        <div class="links">
+          <a class="lnk lnk-green" href="https://quizlet.com" target="_blank">Quizlet — тест</a>
+          <a class="lnk lnk-green" href="https://context.reverso.net" target="_blank">Reverso Context</a>
+        </div>
+      </div>
+      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </div>
+    <div class="day-row" onclick="toggle(this)" id="d-4-5">
+      <div class="day-left"><span class="day-name">Сб</span><span class="day-tag tg-pron">произн.</span></div>
+      <div class="day-content">
+        <p class="topic-name">Forvo + запись себя</p>
+        <p class="topic-desc">Прослушай все 10 слов, запиши себя на телефон, сравни</p>
+        <div class="links">
+          <a class="lnk lnk-amber" href="https://ru.forvo.com" target="_blank">Forvo</a>
+        </div>
+      </div>
+      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </div>
+    <div class="day-row" onclick="toggle(this)" id="d-4-6">
+      <div class="day-left"><span class="day-name">Вс</span><span class="day-tag tg-mix">повтор.</span></div>
+      <div class="day-content">
+        <p class="topic-name">Итог: Passive Voice</p>
+        <p class="topic-desc">3 предложения в passive про новости или работу. Quizlet: финал</p>
+        <div class="links">
+          <a class="lnk lnk-green" href="https://quizlet.com" target="_blank">Quizlet — финал</a>
+        </div>
+      </div>
+      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </div>
+  </div>
+</div>
+
+<!-- НЕДЕЛЯ 3б -->
+<div class="week-section" id="week-5">
+  <p class="week-label">Неделя 3 — Reported Speech</p>
+  <p class="week-progress" id="wp-5"></p>
+  <div class="day-card">
+    <div class="day-row" onclick="toggle(this)" id="d-5-0">
+      <div class="day-left"><span class="day-name">Пн</span><span class="day-tag tg-gram">грамм.</span></div>
+      <div class="day-content">
+        <p class="topic-name">Reported statements &amp; questions</p>
+        <p class="topic-desc">She said she was tired. He asked if I knew.</p>
+        <div class="links">
+          <a class="lnk lnk-blue" href="https://www.perfect-english-grammar.com/reported-speech.html" target="_blank">Объяснение</a>
+          <a class="lnk lnk-blue" href="https://www.perfect-english-grammar.com/reported-speech-exercise-1.html" target="_blank">Упражнение 1</a>
+          <a class="lnk lnk-blue" href="https://www.perfect-english-grammar.com/reported-questions-exercise-1.html" target="_blank">Вопросы</a>
+        </div>
+      </div>
+      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </div>
+    <div class="day-row" onclick="toggle(this)" id="d-5-1">
+      <div class="day-left"><span class="day-name">Вт</span><span class="day-tag tg-vocab">словарь</span></div>
+      <div class="day-content">
+        <p class="topic-name">10 слов: природа и окружающая среда</p>
+        <p class="topic-desc">Quizlet: сет "environment nature vocabulary B2"</p>
+        <div class="links">
+          <a class="lnk lnk-green" href="https://quizlet.com/search?query=environment+nature+b2+vocabulary&type=sets" target="_blank">Quizlet → сет</a>
+        </div>
+      </div>
+      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </div>
+    <div class="day-row" onclick="toggle(this)" id="d-5-2">
+      <div class="day-left"><span class="day-name">Ср</span><span class="day-tag tg-pron">произн.</span></div>
+      <div class="day-content">
+        <p class="topic-name">Интонация при пересказе</p>
+        <p class="topic-desc">YouGlish: "she told me that" — как меняется интонация в косвенной речи</p>
+        <div class="links">
+          <a class="lnk lnk-amber" href="https://youglish.com" target="_blank">YouGlish</a>
+        </div>
+      </div>
+      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </div>
+    <div class="day-row" onclick="toggle(this)" id="d-5-3">
+      <div class="day-left"><span class="day-name">Чт</span><span class="day-tag tg-gram">грамм.</span></div>
+      <div class="day-content">
+        <p class="topic-name">Reported commands &amp; mixed</p>
+        <p class="topic-desc">He told me to go. She said she had been waiting.</p>
+        <div class="links">
+          <a class="lnk lnk-blue" href="https://www.perfect-english-grammar.com/reported-speech-exercise-2.html" target="_blank">Упражнение 2</a>
+          <a class="lnk lnk-blue" href="https://www.perfect-english-grammar.com/reported-speech-exercise-3.html" target="_blank">Упражнение 3</a>
+        </div>
+      </div>
+      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </div>
+    <div class="day-row" onclick="toggle(this)" id="d-5-4">
+      <div class="day-left"><span class="day-name">Пт</span><span class="day-tag tg-vocab">словарь</span></div>
+      <div class="day-content">
+        <p class="topic-name">Повторение + Reverso</p>
+        <p class="topic-desc">Тест по словам природы, 5 слов в контексте</p>
+        <div class="links">
+          <a class="lnk lnk-green" href="https://quizlet.com" target="_blank">Quizlet — тест</a>
+          <a class="lnk lnk-green" href="https://context.reverso.net" target="_blank">Reverso Context</a>
+        </div>
+      </div>
+      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </div>
+    <div class="day-row" onclick="toggle(this)" id="d-5-5">
+      <div class="day-left"><span class="day-name">Сб</span><span class="day-tag tg-pron">произн.</span></div>
+      <div class="day-content">
+        <p class="topic-name">Forvo: слова природы</p>
+        <p class="topic-desc">Особое внимание: drought, environment, sustainable</p>
+        <div class="links">
+          <a class="lnk lnk-amber" href="https://ru.forvo.com" target="_blank">Forvo</a>
+        </div>
+      </div>
+      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </div>
+    <div class="day-row" onclick="toggle(this)" id="d-5-6">
+      <div class="day-left"><span class="day-name">Вс</span><span class="day-tag tg-mix">повтор.</span></div>
+      <div class="day-content">
+        <p class="topic-name">Итог: Reported Speech</p>
+        <p class="topic-desc">Перескажи 3 фразы из разговора этой недели в косвенной речи</p>
+        <div class="links">
+          <a class="lnk lnk-green" href="https://quizlet.com" target="_blank">Quizlet — финал</a>
+        </div>
+      </div>
+      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </div>
+  </div>
+</div>
+
+<!-- НЕДЕЛЯ 4а -->
+<div class="week-section" id="week-6">
+  <p class="week-label">Неделя 4 — Артикли &amp; существительные</p>
+  <p class="week-progress" id="wp-6"></p>
+  <div class="day-card">
+    <div class="day-row" onclick="toggle(this)" id="d-6-0">
+      <div class="day-left"><span class="day-name">Пн</span><span class="day-tag tg-gram">грамм.</span></div>
+      <div class="day-content">
+        <p class="topic-name">A / An / The / — (zero article)</p>
+        <p class="topic-desc">The sun, a cat, — music, — love — логика артиклей</p>
+        <div class="links">
+          <a class="lnk lnk-blue" href="https://www.perfect-english-grammar.com/articles.html" target="_blank">Объяснение</a>
+          <a class="lnk lnk-blue" href="https://www.perfect-english-grammar.com/articles-exercise-1.html" target="_blank">Упражнение 1</a>
+          <a class="lnk lnk-blue" href="https://www.perfect-english-grammar.com/articles-exercise-2.html" target="_blank">Упражнение 2</a>
+        </div>
+      </div>
+      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </div>
+    <div class="day-row" onclick="toggle(this)" id="d-6-1">
+      <div class="day-left"><span class="day-name">Вт</span><span class="day-tag tg-vocab">словарь</span></div>
+      <div class="day-content">
+        <p class="topic-name">10 слов: путешествия и места</p>
+        <p class="topic-desc">Quizlet: сет "travel places vocabulary B2"</p>
+        <div class="links">
+          <a class="lnk lnk-green" href="https://quizlet.com/search?query=travel+places+vocabulary+b2&type=sets" target="_blank">Quizlet → сет</a>
+        </div>
+      </div>
+      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </div>
+    <div class="day-row" onclick="toggle(this)" id="d-6-2">
+      <div class="day-left"><span class="day-name">Ср</span><span class="day-tag tg-pron">произн.</span></div>
+      <div class="day-content">
+        <p class="topic-name">«The» — два произношения</p>
+        <p class="topic-desc">YouGlish: "the apple" vs "the car" — слушай /ðə/ и /ði/ перед гласной</p>
+        <div class="links">
+          <a class="lnk lnk-amber" href="https://youglish.com" target="_blank">YouGlish</a>
+        </div>
+      </div>
+      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </div>
+    <div class="day-row" onclick="toggle(this)" id="d-6-3">
+      <div class="day-left"><span class="day-name">Чт</span><span class="day-tag tg-gram">грамм.</span></div>
+      <div class="day-content">
+        <p class="topic-name">Countable vs Uncountable</p>
+        <p class="topic-desc">Much / many / a little / a few / a lot of — логика выбора</p>
+        <div class="links">
+          <a class="lnk lnk-blue" href="https://www.perfect-english-grammar.com/countable-uncountable-nouns.html" target="_blank">Объяснение</a>
+          <a class="lnk lnk-blue" href="https://www.perfect-english-grammar.com/much-many-a-lot-exercise-1.html" target="_blank">Much/Many</a>
+          <a class="lnk lnk-blue" href="https://www.perfect-english-grammar.com/a-few-a-little-exercise-1.html" target="_blank">Few/Little</a>
+        </div>
+      </div>
+      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </div>
+    <div class="day-row" onclick="toggle(this)" id="d-6-4">
+      <div class="day-left"><span class="day-name">Пт</span><span class="day-tag tg-vocab">словарь</span></div>
+      <div class="day-content">
+        <p class="topic-name">Повторение + Reverso</p>
+        <p class="topic-desc">Тест по словам путешествий, 5 слов в контексте</p>
+        <div class="links">
+          <a class="lnk lnk-green" href="https://quizlet.com" target="_blank">Quizlet — тест</a>
+          <a class="lnk lnk-green" href="https://context.reverso.net" target="_blank">Reverso Context</a>
+        </div>
+      </div>
+      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </div>
+    <div class="day-row" onclick="toggle(this)" id="d-6-5">
+      <div class="day-left"><span class="day-name">Сб</span><span class="day-tag tg-pron">произн.</span></div>
+      <div class="day-content">
+        <p class="topic-name">Forvo: слова недели</p>
+        <p class="topic-desc">Особое внимание: itinerary, destination, accommodation</p>
+        <div class="links">
+          <a class="lnk lnk-amber" href="https://ru.forvo.com" target="_blank">Forvo</a>
+        </div>
+      </div>
+      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </div>
+    <div class="day-row" onclick="toggle(this)" id="d-6-6">
+      <div class="day-left"><span class="day-name">Вс</span><span class="day-tag tg-mix">повтор.</span></div>
+      <div class="day-content">
+        <p class="topic-name">Итог: артикли</p>
+        <p class="topic-desc">5 предложений о своём городе, осознанно используя the/a/—</p>
+        <div class="links">
+          <a class="lnk lnk-green" href="https://quizlet.com" target="_blank">Quizlet — финал</a>
+        </div>
+      </div>
+      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </div>
+  </div>
+</div>
+
+<!-- НЕДЕЛЯ 4б -->
+<div class="week-section" id="week-7">
+  <p class="week-label">Неделя 4 — Relative Clauses</p>
+  <p class="week-progress" id="wp-7"></p>
+  <div class="day-card">
+    <div class="day-row" onclick="toggle(this)" id="d-7-0">
+      <div class="day-left"><span class="day-name">Пн</span><span class="day-tag tg-gram">грамм.</span></div>
+      <div class="day-content">
+        <p class="topic-name">Defining relative clauses</p>
+        <p class="topic-desc">The man who called / the book that I read — без запятых</p>
+        <div class="links">
+          <a class="lnk lnk-blue" href="https://www.perfect-english-grammar.com/relative-clauses.html" target="_blank">Объяснение</a>
+          <a class="lnk lnk-blue" href="https://www.perfect-english-grammar.com/relative-clauses-exercise-1.html" target="_blank">Упражнение 1</a>
+        </div>
+      </div>
+      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </div>
+    <div class="day-row" onclick="toggle(this)" id="d-7-1">
+      <div class="day-left"><span class="day-name">Вт</span><span class="day-tag tg-vocab">словарь</span></div>
+      <div class="day-content">
+        <p class="topic-name">10 слов: здоровье и образ жизни</p>
+        <p class="topic-desc">Quizlet: сет "health lifestyle vocabulary B2"</p>
+        <div class="links">
+          <a class="lnk lnk-green" href="https://quizlet.com/search?query=health+lifestyle+b2+vocabulary&type=sets" target="_blank">Quizlet → сет</a>
+        </div>
+      </div>
+      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </div>
+    <div class="day-row" onclick="toggle(this)" id="d-7-2">
+      <div class="day-left"><span class="day-name">Ср</span><span class="day-tag tg-pron">произн.</span></div>
+      <div class="day-content">
+        <p class="topic-name">Слова здоровья на YouGlish</p>
+        <p class="topic-desc">symptoms, diagnosis, well-being — слушай в реальных контекстах</p>
+        <div class="links">
+          <a class="lnk lnk-amber" href="https://youglish.com" target="_blank">YouGlish</a>
+        </div>
+      </div>
+      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </div>
+    <div class="day-row" onclick="toggle(this)" id="d-7-3">
+      <div class="day-left"><span class="day-name">Чт</span><span class="day-tag tg-gram">грамм.</span></div>
+      <div class="day-content">
+        <p class="topic-name">Non-defining relative clauses</p>
+        <p class="topic-desc">My friend, who lives in London, said... — с запятыми</p>
+        <div class="links">
+          <a class="lnk lnk-blue" href="https://www.perfect-english-grammar.com/relative-clauses-exercise-2.html" target="_blank">Упражнение 2</a>
+          <a class="lnk lnk-blue" href="https://www.perfect-english-grammar.com/relative-clauses-exercise-3.html" target="_blank">Упражнение 3</a>
+        </div>
+      </div>
+      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </div>
+    <div class="day-row" onclick="toggle(this)" id="d-7-4">
+      <div class="day-left"><span class="day-name">Пт</span><span class="day-tag tg-vocab">словарь</span></div>
+      <div class="day-content">
+        <p class="topic-name">Финальный тест + Reverso</p>
+        <p class="topic-desc">Тест по словам здоровья, 5 слов в предложениях</p>
+        <div class="links">
+          <a class="lnk lnk-green" href="https://quizlet.com" target="_blank">Quizlet — тест</a>
+          <a class="lnk lnk-green" href="https://context.reverso.net" target="_blank">Reverso Context</a>
+        </div>
+      </div>
+      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </div>
+    <div class="day-row" onclick="toggle(this)" id="d-7-5">
+      <div class="day-left"><span class="day-name">Сб</span><span class="day-tag tg-pron">произн.</span></div>
+      <div class="day-content">
+        <p class="topic-name">Forvo: финальный прогон</p>
+        <p class="topic-desc">Прослушай слова недели. Запиши себя — сравни с первой неделей!</p>
+        <div class="links">
+          <a class="lnk lnk-amber" href="https://ru.forvo.com" target="_blank">Forvo</a>
+        </div>
+      </div>
+      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </div>
+    <div class="day-row" onclick="toggle(this)" id="d-7-6">
+      <div class="day-left"><span class="day-name">Вс</span><span class="day-tag tg-mix">🎉 финал</span></div>
+      <div class="day-content">
+        <p class="topic-name">Итог всего месяца!</p>
+        <p class="topic-desc">5 предложений с relative clauses + слова месяца. Ты прошла все 8 тем!</p>
+        <div class="links">
+          <a class="lnk lnk-green" href="https://quizlet.com" target="_blank">Quizlet — финал</a>
+        </div>
+      </div>
+      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script>
+const TOTAL = 56;
+
+function getKey(id) { return 'eng_' + id; }
+
+function toggle(row) {
+  const id = row.id;
+  const done = row.classList.toggle('done');
+  localStorage.setItem(getKey(id), done ? '1' : '0');
+  updateProgress();
+}
+
+function updateProgress() {
+  let total = 0;
+  for (let w = 0; w < 8; w++) {
+    let wDone = 0;
+    for (let d = 0; d < 7; d++) {
+      const id = 'd-' + w + '-' + d;
+      if (localStorage.getItem(getKey(id)) === '1') { wDone++; total++; }
+    }
+    const el = document.getElementById('wp-' + w);
+    if (el) el.innerHTML = 'Выполнено: <span>' + wDone + ' из 7</span>';
+  }
+  const pct = Math.round(total / TOTAL * 100);
+  document.getElementById('globalBar').style.width = pct + '%';
+  document.getElementById('globalLabel').textContent = total + ' из ' + TOTAL + ' дней выполнено (' + pct + '%)';
+}
+
+function showWeek(idx, btn) {
+  document.querySelectorAll('.week-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.week-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('week-' + idx).classList.add('active');
+  btn.classList.add('active');
+}
+
+function loadState() {
+  for (let w = 0; w < 8; w++) {
+    for (let d = 0; d < 7; d++) {
+      const id = 'd-' + w + '-' + d;
+      if (localStorage.getItem(getKey(id)) === '1') {
+        const row = document.getElementById(id);
+        if (row) row.classList.add('done');
+      }
+    }
+  }
+  updateProgress();
+}
+
+loadState();
+</script>
+</body>
+</html>
