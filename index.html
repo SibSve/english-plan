@@ -247,6 +247,7 @@
 
 <header>
   <h1>My English Plan 🇬🇧</h1>
+  <div id="user-bar"><span id="user-email"></span><button id="logout-btn" onclick="doLogout()">Выйти</button></div>
   <div class="progress-bar-wrap">
     <div class="progress-bar-fill" id="globalBar" style="width:0%"></div>
   </div>
@@ -985,25 +986,173 @@
 
 </div>
 
-<script>
+<style>
+#auth-screen {
+  position: fixed; inset: 0; background: var(--bg);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 999; padding: 24px;
+}
+.auth-box {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 16px; padding: 32px 28px; width: 100%; max-width: 360px;
+}
+.auth-box h2 {
+  font-family: 'Playfair Display', serif; font-size: 20px;
+  font-weight: 600; margin-bottom: 6px;
+}
+.auth-box p { font-size: 13px; color: var(--muted); margin-bottom: 24px; }
+.auth-box input {
+  width: 100%; padding: 11px 14px; border: 1px solid var(--border);
+  border-radius: 10px; font-size: 15px; font-family: 'DM Sans', sans-serif;
+  background: var(--bg); color: var(--text); margin-bottom: 10px;
+  outline: none;
+}
+.auth-box input:focus { border-color: var(--vocab); }
+.auth-btn {
+  width: 100%; padding: 12px; border-radius: 10px; border: none;
+  background: var(--text); color: #fff; font-size: 15px;
+  font-family: 'DM Sans', sans-serif; font-weight: 500;
+  cursor: pointer; margin-bottom: 10px;
+}
+.auth-btn.secondary {
+  background: transparent; color: var(--text);
+  border: 1px solid var(--border);
+}
+.auth-error { font-size: 12px; color: #c0392b; margin-top: 4px; min-height: 18px; }
+.auth-toggle { font-size: 13px; color: var(--muted); text-align: center; margin-top: 8px; }
+.auth-toggle a { color: var(--vocab); cursor: pointer; text-decoration: none; }
+#user-bar {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-top: 8px;
+}
+#user-email { font-size: 12px; color: var(--muted); }
+#logout-btn {
+  font-size: 12px; color: var(--muted); background: none; border: none;
+  cursor: pointer; text-decoration: underline; font-family: 'DM Sans', sans-serif;
+}
+</style>
+
+<div id="auth-screen">
+  <div class="auth-box">
+    <h2>My English Plan</h2>
+    <p id="auth-subtitle">Войди, чтобы твой прогресс сохранялся на всех устройствах</p>
+    <input type="email" id="auth-email" placeholder="Email" autocomplete="email" />
+    <input type="password" id="auth-password" placeholder="Пароль" autocomplete="current-password" />
+    <div class="auth-error" id="auth-error"></div>
+    <button class="auth-btn" id="auth-submit-btn" onclick="authSubmit()">Войти</button>
+    <div class="auth-toggle" id="auth-toggle-text">
+      Нет аккаунта? <a onclick="toggleAuthMode()">Зарегистрироваться</a>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+import { getDatabase, ref, set, get, onValue } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDNj3rjEe9eMDwW6j9-r4Rf06GPn_zt2TA",
+  authDomain: "english-plan-3bcf7.firebaseapp.com",
+  projectId: "english-plan-3bcf7",
+  storageBucket: "english-plan-3bcf7.firebasestorage.app",
+  messagingSenderId: "869668700998",
+  appId: "1:869668700998:web:ed05c8eeaa5d5d379e1b47",
+  databaseURL: "https://english-plan-3bcf7-default-rtdb.europe-west1.firebasedatabase.app"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getDatabase(app);
+
 const TOTAL = 56;
+let currentUser = null;
+let isRegisterMode = false;
 
-function getKey(id) { return 'eng_' + id; }
+window.toggleAuthMode = function() {
+  isRegisterMode = !isRegisterMode;
+  document.getElementById('auth-submit-btn').textContent = isRegisterMode ? 'Зарегистрироваться' : 'Войти';
+  document.getElementById('auth-subtitle').textContent = isRegisterMode
+    ? 'Создай аккаунт — прогресс будет виден на всех устройствах'
+    : 'Войди, чтобы твой прогресс сохранялся на всех устройствах';
+  document.getElementById('auth-toggle-text').innerHTML = isRegisterMode
+    ? 'Уже есть аккаунт? <a onclick="toggleAuthMode()">Войти</a>'
+    : 'Нет аккаунта? <a onclick="toggleAuthMode()">Зарегистрироваться</a>';
+  document.getElementById('auth-error').textContent = '';
+};
 
-function toggle(row) {
+window.authSubmit = async function() {
+  const email = document.getElementById('auth-email').value.trim();
+  const password = document.getElementById('auth-password').value;
+  const errEl = document.getElementById('auth-error');
+  errEl.textContent = '';
+  if (!email || !password) { errEl.textContent = 'Введи email и пароль'; return; }
+  try {
+    if (isRegisterMode) {
+      await createUserWithEmailAndPassword(auth, email, password);
+    } else {
+      await signInWithEmailAndPassword(auth, email, password);
+    }
+  } catch(e) {
+    const msgs = {
+      'auth/invalid-email': 'Неверный формат email',
+      'auth/user-not-found': 'Пользователь не найден',
+      'auth/wrong-password': 'Неверный пароль',
+      'auth/email-already-in-use': 'Email уже зарегистрирован',
+      'auth/weak-password': 'Пароль должен быть не менее 6 символов',
+      'auth/invalid-credential': 'Неверный email или пароль',
+    };
+    errEl.textContent = msgs[e.code] || 'Ошибка: ' + e.message;
+  }
+};
+
+onAuthStateChanged(auth, async (user) => {
+  if (user) {
+    currentUser = user;
+    document.getElementById('auth-screen').style.display = 'none';
+    document.getElementById('user-email').textContent = user.email;
+    await loadFromFirebase();
+  } else {
+    currentUser = null;
+    document.getElementById('auth-screen').style.display = 'flex';
+  }
+});
+
+window.doLogout = async function() {
+  await signOut(auth);
+  document.querySelectorAll('.day-row').forEach(r => r.classList.remove('done'));
+  updateProgress();
+};
+
+window.toggle = async function(row) {
+  if (!currentUser) return;
   const id = row.id;
   const done = row.classList.toggle('done');
-  localStorage.setItem(getKey(id), done ? '1' : '0');
+  updateProgress();
+  const r = ref(db, 'users/' + currentUser.uid + '/' + id);
+  await set(r, done ? true : null);
+};
+
+async function loadFromFirebase() {
+  if (!currentUser) return;
+  const r = ref(db, 'users/' + currentUser.uid);
+  const snap = await get(r);
+  const data = snap.val() || {};
+  document.querySelectorAll('.day-row').forEach(row => {
+    if (data[row.id]) row.classList.add('done');
+    else row.classList.remove('done');
+  });
   updateProgress();
 }
 
-function updateProgress() {
+window.updateProgress = function() {
   let total = 0;
   for (let w = 0; w < 8; w++) {
     let wDone = 0;
     for (let d = 0; d < 7; d++) {
       const id = 'd-' + w + '-' + d;
-      if (localStorage.getItem(getKey(id)) === '1') { wDone++; total++; }
+      const row = document.getElementById(id);
+      if (row && row.classList.contains('done')) { wDone++; total++; }
     }
     const el = document.getElementById('wp-' + w);
     if (el) el.innerHTML = 'Выполнено: <span>' + wDone + ' из 7</span>';
@@ -1011,29 +1160,16 @@ function updateProgress() {
   const pct = Math.round(total / TOTAL * 100);
   document.getElementById('globalBar').style.width = pct + '%';
   document.getElementById('globalLabel').textContent = total + ' из ' + TOTAL + ' дней выполнено (' + pct + '%)';
-}
+};
 
-function showWeek(idx, btn) {
+window.showWeek = function(idx, btn) {
   document.querySelectorAll('.week-section').forEach(s => s.classList.remove('active'));
   document.querySelectorAll('.week-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('week-' + idx).classList.add('active');
   btn.classList.add('active');
-}
+};
 
-function loadState() {
-  for (let w = 0; w < 8; w++) {
-    for (let d = 0; d < 7; d++) {
-      const id = 'd-' + w + '-' + d;
-      if (localStorage.getItem(getKey(id)) === '1') {
-        const row = document.getElementById(id);
-        if (row) row.classList.add('done');
-      }
-    }
-  }
-  updateProgress();
-}
-
-loadState();
+updateProgress();
 </script>
 </body>
 </html>
