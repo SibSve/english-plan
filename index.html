@@ -159,6 +159,7 @@
     padding-top: 1px;
   }
 
+  .day-date { font-size: 10px; color: var(--muted); text-align: center; }
   .day-name {
     font-size: 11px;
     font-weight: 500;
@@ -272,8 +273,8 @@
   <p class="week-label">Неделя 1 — Present Perfect &amp; Past</p>
   <p class="week-progress" id="wp-0"></p>
   <div class="day-card">
-    <div class="day-row" onclick="toggle(this)" id="d-0-0">
-      <div class="day-left"><span class="day-name">Пн</span><span class="day-tag tg-gram">грамм.</span></div>
+    <div class="day-row" id="d-0-0">
+      <div class="day-left"><span class="day-name">Пн</span><span class="day-date">01.06</span><span class="day-tag tg-gram">грамм.</span></div>
       <div class="day-content">
         <p class="topic-name">Present Perfect vs Past Simple</p>
         <p class="topic-desc">already/just/ever/never → Perfect; конкретное время → Simple</p>
@@ -283,10 +284,10 @@
           <a class="lnk lnk-blue" href="https://www.perfect-english-grammar.com/past-simple-present-perfect-1.html" target="_blank">Perfect vs Simple</a>
         </div>
       </div>
-      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="checkbox" onclick="toggle(this.closest('.day-row'))"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     </div>
-    <div class="day-row" onclick="toggle(this)" id="d-0-1">
-      <div class="day-left"><span class="day-name">Вт</span><span class="day-tag tg-vocab">словарь</span></div>
+    <div class="day-row" id="d-0-1">
+      <div class="day-left"><span class="day-name">Вт</span><span class="day-date">02.06</span><span class="day-tag tg-vocab">словарь</span></div>
       <div class="day-content">
         <p class="topic-name">10 слов: действия и события</p>
         <p class="topic-desc">Quizlet: найди сет "B1 actions &amp; events", учи через карточки</p>
@@ -294,10 +295,10 @@
           <a class="lnk lnk-green" href="https://quizlet.com/search?query=b1+vocabulary+actions&type=sets" target="_blank">Quizlet → сет</a>
         </div>
       </div>
-      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="checkbox" onclick="toggle(this.closest('.day-row'))"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     </div>
-    <div class="day-row" onclick="toggle(this)" id="d-0-2">
-      <div class="day-left"><span class="day-name">Ср</span><span class="day-tag tg-pron">произн.</span></div>
+    <div class="day-row" id="d-0-2">
+      <div class="day-left"><span class="day-name">Ср</span><span class="day-date">03.06</span><span class="day-tag tg-pron">произн.</span></div>
       <div class="day-content">
         <p class="topic-name">Слова недели на YouGlish</p>
         <p class="topic-desc">Введи 3–4 слова из вторника, смотри видео с носителями, повтори вслух</p>
@@ -306,10 +307,10 @@
           <a class="lnk lnk-amber" href="https://ru.forvo.com" target="_blank">Forvo</a>
         </div>
       </div>
-      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="checkbox" onclick="toggle(this.closest('.day-row'))"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     </div>
-    <div class="day-row" onclick="toggle(this)" id="d-0-3">
-      <div class="day-left"><span class="day-name">Чт</span><span class="day-tag tg-gram">грамм.</span></div>
+    <div class="day-row" id="d-0-3">
+      <div class="day-left"><span class="day-name">Чт</span><span class="day-date">04.06</span><span class="day-tag tg-gram">грамм.</span></div>
       <div class="day-content">
         <p class="topic-name">Present Perfect Continuous</p>
         <p class="topic-desc">I've been waiting — процесс, который ещё продолжается</p>
@@ -319,10 +320,10 @@
           <a class="lnk lnk-blue" href="https://www.perfect-english-grammar.com/present-perfect-present-perfect-continuous-1.html" target="_blank">Simple vs Continuous</a>
         </div>
       </div>
-      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="checkbox" onclick="toggle(this.closest('.day-row'))"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     </div>
-    <div class="day-row" onclick="toggle(this)" id="d-0-4">
-      <div class="day-left"><span class="day-name">Пт</span><span class="day-tag tg-vocab">словарь</span></div>
+    <div class="day-row" id="d-0-4">
+      <div class="day-left"><span class="day-name">Пт</span><span class="day-date">05.06</span><span class="day-tag tg-vocab">словарь</span></div>
       <div class="day-content">
         <p class="topic-name">Повторение + контекст слов</p>
         <p class="topic-desc">Quizlet: режим «Тест». Потом 5 слов в реальных предложениях на Reverso</p>
@@ -331,10 +332,10 @@
           <a class="lnk lnk-green" href="https://context.reverso.net" target="_blank">Reverso Context</a>
         </div>
       </div>
-      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="checkbox" onclick="toggle(this.closest('.day-row'))"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     </div>
-    <div class="day-row" onclick="toggle(this)" id="d-0-5">
-      <div class="day-left"><span class="day-name">Сб</span><span class="day-tag tg-pron">произн.</span></div>
+    <div class="day-row" id="d-0-5">
+      <div class="day-left"><span class="day-name">Сб</span><span class="day-date">06.06</span><span class="day-tag tg-pron">произн.</span></div>
       <div class="day-content">
         <p class="topic-name">Произношение всех слов недели</p>
         <p class="topic-desc">Forvo: прослушай все 10 слов от носителей, проверь ударения</p>
@@ -342,10 +343,10 @@
           <a class="lnk lnk-amber" href="https://ru.forvo.com" target="_blank">Forvo</a>
         </div>
       </div>
-      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="checkbox" onclick="toggle(this.closest('.day-row'))"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     </div>
-    <div class="day-row" onclick="toggle(this)" id="d-0-6">
-      <div class="day-left"><span class="day-name">Вс</span><span class="day-tag tg-mix">повтор.</span></div>
+    <div class="day-row" id="d-0-6">
+      <div class="day-left"><span class="day-name">Вс</span><span class="day-date">07.06</span><span class="day-tag tg-mix">повтор.</span></div>
       <div class="day-content">
         <p class="topic-name">Мини-итог недели</p>
         <p class="topic-desc">Вспомни 2 правила. Quizlet: финальный прогон. Произнеси 3 своих предложения вслух</p>
@@ -353,7 +354,7 @@
           <a class="lnk lnk-green" href="https://quizlet.com" target="_blank">Quizlet — финал</a>
         </div>
       </div>
-      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="checkbox" onclick="toggle(this.closest('.day-row'))"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     </div>
   </div>
 </div>
@@ -363,8 +364,8 @@
   <p class="week-label">Неделя 1 — Past времена</p>
   <p class="week-progress" id="wp-1"></p>
   <div class="day-card">
-    <div class="day-row" onclick="toggle(this)" id="d-1-0">
-      <div class="day-left"><span class="day-name">Пн</span><span class="day-tag tg-gram">грамм.</span></div>
+    <div class="day-row" id="d-1-0">
+      <div class="day-left"><span class="day-name">Пн</span><span class="day-date">08.06</span><span class="day-tag tg-gram">грамм.</span></div>
       <div class="day-content">
         <p class="topic-name">Past Simple vs Past Continuous</p>
         <p class="topic-desc">I was cooking when he called — фон vs действие</p>
@@ -373,10 +374,10 @@
           <a class="lnk lnk-blue" href="https://www.perfect-english-grammar.com/past-simple-or-past-continuous-exercise-1.html" target="_blank">Упражнение</a>
         </div>
       </div>
-      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="checkbox" onclick="toggle(this.closest('.day-row'))"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     </div>
-    <div class="day-row" onclick="toggle(this)" id="d-1-1">
-      <div class="day-left"><span class="day-name">Вт</span><span class="day-tag tg-vocab">словарь</span></div>
+    <div class="day-row" id="d-1-1">
+      <div class="day-left"><span class="day-name">Вт</span><span class="day-date">09.06</span><span class="day-tag tg-vocab">словарь</span></div>
       <div class="day-content">
         <p class="topic-name">10 слов: черты характера</p>
         <p class="topic-desc">Quizlet: сет "personality adjectives B1"</p>
@@ -384,10 +385,10 @@
           <a class="lnk lnk-green" href="https://quizlet.com/search?query=personality+adjectives+b1&type=sets" target="_blank">Quizlet → сет</a>
         </div>
       </div>
-      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="checkbox" onclick="toggle(this.closest('.day-row'))"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     </div>
-    <div class="day-row" onclick="toggle(this)" id="d-1-2">
-      <div class="day-left"><span class="day-name">Ср</span><span class="day-tag tg-pron">произн.</span></div>
+    <div class="day-row" id="d-1-2">
+      <div class="day-left"><span class="day-name">Ср</span><span class="day-date">10.06</span><span class="day-tag tg-pron">произн.</span></div>
       <div class="day-content">
         <p class="topic-name">Shadowing: прилагательные характера</p>
         <p class="topic-desc">YouGlish: ambitious, reliable, stubborn — как произносят в речи</p>
@@ -395,10 +396,10 @@
           <a class="lnk lnk-amber" href="https://youglish.com" target="_blank">YouGlish</a>
         </div>
       </div>
-      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="checkbox" onclick="toggle(this.closest('.day-row'))"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     </div>
-    <div class="day-row" onclick="toggle(this)" id="d-1-3">
-      <div class="day-left"><span class="day-name">Чт</span><span class="day-tag tg-gram">грамм.</span></div>
+    <div class="day-row" id="d-1-3">
+      <div class="day-left"><span class="day-name">Чт</span><span class="day-date">11.06</span><span class="day-tag tg-gram">грамм.</span></div>
       <div class="day-content">
         <p class="topic-name">Past Perfect</p>
         <p class="topic-desc">She had left before I arrived — что случилось раньше из двух прошлых</p>
@@ -408,10 +409,10 @@
           <a class="lnk lnk-blue" href="https://www.perfect-english-grammar.com/past-perfect-exercise-2.html" target="_blank">Упражнение 2</a>
         </div>
       </div>
-      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="checkbox" onclick="toggle(this.closest('.day-row'))"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     </div>
-    <div class="day-row" onclick="toggle(this)" id="d-1-4">
-      <div class="day-left"><span class="day-name">Пт</span><span class="day-tag tg-vocab">словарь</span></div>
+    <div class="day-row" id="d-1-4">
+      <div class="day-left"><span class="day-name">Пт</span><span class="day-date">12.06</span><span class="day-tag tg-vocab">словарь</span></div>
       <div class="day-content">
         <p class="topic-name">Повторение + Reverso</p>
         <p class="topic-desc">Тест по словам характера, затем 5 слов в контексте</p>
@@ -420,10 +421,10 @@
           <a class="lnk lnk-green" href="https://context.reverso.net" target="_blank">Reverso Context</a>
         </div>
       </div>
-      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="checkbox" onclick="toggle(this.closest('.day-row'))"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     </div>
-    <div class="day-row" onclick="toggle(this)" id="d-1-5">
-      <div class="day-left"><span class="day-name">Сб</span><span class="day-tag tg-pron">произн.</span></div>
+    <div class="day-row" id="d-1-5">
+      <div class="day-left"><span class="day-name">Сб</span><span class="day-date">13.06</span><span class="day-tag tg-pron">произн.</span></div>
       <div class="day-content">
         <p class="topic-name">Forvo + запись себя</p>
         <p class="topic-desc">Прослушай все 10 слов, запиши себя на телефон, сравни с оригиналом</p>
@@ -431,10 +432,10 @@
           <a class="lnk lnk-amber" href="https://ru.forvo.com" target="_blank">Forvo</a>
         </div>
       </div>
-      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="checkbox" onclick="toggle(this.closest('.day-row'))"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     </div>
-    <div class="day-row" onclick="toggle(this)" id="d-1-6">
-      <div class="day-left"><span class="day-name">Вс</span><span class="day-tag tg-mix">повтор.</span></div>
+    <div class="day-row" id="d-1-6">
+      <div class="day-left"><span class="day-name">Вс</span><span class="day-date">14.06</span><span class="day-tag tg-mix">повтор.</span></div>
       <div class="day-content">
         <p class="topic-name">Итог: Past времена</p>
         <p class="topic-desc">3 предложения о прошлой неделе, используя Simple, Continuous и Perfect</p>
@@ -442,7 +443,7 @@
           <a class="lnk lnk-green" href="https://quizlet.com" target="_blank">Quizlet — финал</a>
         </div>
       </div>
-      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="checkbox" onclick="toggle(this.closest('.day-row'))"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     </div>
   </div>
 </div>
@@ -452,8 +453,8 @@
   <p class="week-label">Неделя 2 — Conditionals</p>
   <p class="week-progress" id="wp-2"></p>
   <div class="day-card">
-    <div class="day-row" onclick="toggle(this)" id="d-2-0">
-      <div class="day-left"><span class="day-name">Пн</span><span class="day-tag tg-gram">грамм.</span></div>
+    <div class="day-row" id="d-2-0">
+      <div class="day-left"><span class="day-name">Пн</span><span class="day-date">15.06</span><span class="day-tag tg-gram">грамм.</span></div>
       <div class="day-content">
         <p class="topic-name">Zero &amp; First Conditional</p>
         <p class="topic-desc">If it rains, I stay (0) / I'll stay (1) — реальные условия</p>
@@ -463,10 +464,10 @@
           <a class="lnk lnk-blue" href="https://www.perfect-english-grammar.com/zero-and-first-conditional-exercise.html" target="_blank">Упражнение</a>
         </div>
       </div>
-      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="checkbox" onclick="toggle(this.closest('.day-row'))"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     </div>
-    <div class="day-row" onclick="toggle(this)" id="d-2-1">
-      <div class="day-left"><span class="day-name">Вт</span><span class="day-tag tg-vocab">словарь</span></div>
+    <div class="day-row" id="d-2-1">
+      <div class="day-left"><span class="day-name">Вт</span><span class="day-date">16.06</span><span class="day-tag tg-vocab">словарь</span></div>
       <div class="day-content">
         <p class="topic-name">10 слов: работа и карьера</p>
         <p class="topic-desc">Quizlet: сет "work career vocabulary B1/B2"</p>
@@ -474,10 +475,10 @@
           <a class="lnk lnk-green" href="https://quizlet.com/search?query=work+career+vocabulary+b1&type=sets" target="_blank">Quizlet → сет</a>
         </div>
       </div>
-      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="checkbox" onclick="toggle(this.closest('.day-row'))"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     </div>
-    <div class="day-row" onclick="toggle(this)" id="d-2-2">
-      <div class="day-left"><span class="day-name">Ср</span><span class="day-tag tg-pron">произн.</span></div>
+    <div class="day-row" id="d-2-2">
+      <div class="day-left"><span class="day-name">Ср</span><span class="day-date">17.06</span><span class="day-tag tg-pron">произн.</span></div>
       <div class="day-content">
         <p class="topic-name">Интонация в условных предложениях</p>
         <p class="topic-desc">YouGlish: "if I were you" — слушай паузу между частями</p>
@@ -485,10 +486,10 @@
           <a class="lnk lnk-amber" href="https://youglish.com" target="_blank">YouGlish</a>
         </div>
       </div>
-      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="checkbox" onclick="toggle(this.closest('.day-row'))"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     </div>
-    <div class="day-row" onclick="toggle(this)" id="d-2-3">
-      <div class="day-left"><span class="day-name">Чт</span><span class="day-tag tg-gram">грамм.</span></div>
+    <div class="day-row" id="d-2-3">
+      <div class="day-left"><span class="day-name">Чт</span><span class="day-date">18.06</span><span class="day-tag tg-gram">грамм.</span></div>
       <div class="day-content">
         <p class="topic-name">Second &amp; Third Conditional</p>
         <p class="topic-desc">If I were you... / If I had known... — гипотетические ситуации</p>
@@ -499,10 +500,10 @@
           <a class="lnk lnk-blue" href="https://www.perfect-english-grammar.com/third-conditional-exercise-1.html" target="_blank">Упр. 3rd</a>
         </div>
       </div>
-      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="checkbox" onclick="toggle(this.closest('.day-row'))"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     </div>
-    <div class="day-row" onclick="toggle(this)" id="d-2-4">
-      <div class="day-left"><span class="day-name">Пт</span><span class="day-tag tg-vocab">словарь</span></div>
+    <div class="day-row" id="d-2-4">
+      <div class="day-left"><span class="day-name">Пт</span><span class="day-date">19.06</span><span class="day-tag tg-vocab">словарь</span></div>
       <div class="day-content">
         <p class="topic-name">Повторение + Reverso</p>
         <p class="topic-desc">Тест по словам работы/карьеры, 5 слов в контексте</p>
@@ -511,10 +512,10 @@
           <a class="lnk lnk-green" href="https://context.reverso.net" target="_blank">Reverso Context</a>
         </div>
       </div>
-      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="checkbox" onclick="toggle(this.closest('.day-row'))"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     </div>
-    <div class="day-row" onclick="toggle(this)" id="d-2-5">
-      <div class="day-left"><span class="day-name">Сб</span><span class="day-tag tg-pron">произн.</span></div>
+    <div class="day-row" id="d-2-5">
+      <div class="day-left"><span class="day-name">Сб</span><span class="day-date">20.06</span><span class="day-tag tg-pron">произн.</span></div>
       <div class="day-content">
         <p class="topic-name">Слова недели на Forvo</p>
         <p class="topic-desc">Все 10 слов, повтори вслух по 3 раза, обрати внимание на ударение</p>
@@ -522,10 +523,10 @@
           <a class="lnk lnk-amber" href="https://ru.forvo.com" target="_blank">Forvo</a>
         </div>
       </div>
-      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="checkbox" onclick="toggle(this.closest('.day-row'))"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     </div>
-    <div class="day-row" onclick="toggle(this)" id="d-2-6">
-      <div class="day-left"><span class="day-name">Вс</span><span class="day-tag tg-mix">повтор.</span></div>
+    <div class="day-row" id="d-2-6">
+      <div class="day-left"><span class="day-name">Вс</span><span class="day-date">21.06</span><span class="day-tag tg-mix">повтор.</span></div>
       <div class="day-content">
         <p class="topic-name">Итог: Conditionals</p>
         <p class="topic-desc">По 1 предложению каждого типа (0–3) о своей жизни. Quizlet: финал слов</p>
@@ -533,7 +534,7 @@
           <a class="lnk lnk-green" href="https://quizlet.com" target="_blank">Quizlet — финал</a>
         </div>
       </div>
-      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="checkbox" onclick="toggle(this.closest('.day-row'))"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     </div>
   </div>
 </div>
@@ -543,8 +544,8 @@
   <p class="week-label">Неделя 2 — Модальные глаголы</p>
   <p class="week-progress" id="wp-3"></p>
   <div class="day-card">
-    <div class="day-row" onclick="toggle(this)" id="d-3-0">
-      <div class="day-left"><span class="day-name">Пн</span><span class="day-tag tg-gram">грамм.</span></div>
+    <div class="day-row" id="d-3-0">
+      <div class="day-left"><span class="day-name">Пн</span><span class="day-date">22.06</span><span class="day-tag tg-gram">грамм.</span></div>
       <div class="day-content">
         <p class="topic-name">Must / Have to / Should</p>
         <p class="topic-desc">Обязательство, необходимость, совет — в чём разница</p>
@@ -554,10 +555,10 @@
           <a class="lnk lnk-blue" href="https://www.perfect-english-grammar.com/modal-verbs-exercise-1.html" target="_blank">Упражнение</a>
         </div>
       </div>
-      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="checkbox" onclick="toggle(this.closest('.day-row'))"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     </div>
-    <div class="day-row" onclick="toggle(this)" id="d-3-1">
-      <div class="day-left"><span class="day-name">Вт</span><span class="day-tag tg-vocab">словарь</span></div>
+    <div class="day-row" id="d-3-1">
+      <div class="day-left"><span class="day-name">Вт</span><span class="day-date">23.06</span><span class="day-tag tg-vocab">словарь</span></div>
       <div class="day-content">
         <p class="topic-name">10 слов: эмоции и состояния</p>
         <p class="topic-desc">Quizlet: сет "emotions feelings vocabulary B1"</p>
@@ -565,10 +566,10 @@
           <a class="lnk lnk-green" href="https://quizlet.com/search?query=emotions+feelings+b1&type=sets" target="_blank">Quizlet → сет</a>
         </div>
       </div>
-      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="checkbox" onclick="toggle(this.closest('.day-row'))"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     </div>
-    <div class="day-row" onclick="toggle(this)" id="d-3-2">
-      <div class="day-left"><span class="day-name">Ср</span><span class="day-tag tg-pron">произн.</span></div>
+    <div class="day-row" id="d-3-2">
+      <div class="day-left"><span class="day-name">Ср</span><span class="day-date">24.06</span><span class="day-tag tg-pron">произн.</span></div>
       <div class="day-content">
         <p class="topic-name">Редуцированные модальные</p>
         <p class="topic-desc">YouGlish: "should have" — слушай, как сокращается в беглой речи</p>
@@ -576,10 +577,10 @@
           <a class="lnk lnk-amber" href="https://youglish.com" target="_blank">YouGlish</a>
         </div>
       </div>
-      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="checkbox" onclick="toggle(this.closest('.day-row'))"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     </div>
-    <div class="day-row" onclick="toggle(this)" id="d-3-3">
-      <div class="day-left"><span class="day-name">Чт</span><span class="day-tag tg-gram">грамм.</span></div>
+    <div class="day-row" id="d-3-3">
+      <div class="day-left"><span class="day-name">Чт</span><span class="day-date">25.06</span><span class="day-tag tg-gram">грамм.</span></div>
       <div class="day-content">
         <p class="topic-name">Modal + have + V3</p>
         <p class="topic-desc">She must have forgotten / could have called — домыслы о прошлом</p>
@@ -589,10 +590,10 @@
           <a class="lnk lnk-blue" href="https://www.perfect-english-grammar.com/modal-verbs-for-the-past-exercise-2.html" target="_blank">Упражнение 2</a>
         </div>
       </div>
-      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="checkbox" onclick="toggle(this.closest('.day-row'))"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     </div>
-    <div class="day-row" onclick="toggle(this)" id="d-3-4">
-      <div class="day-left"><span class="day-name">Пт</span><span class="day-tag tg-vocab">словарь</span></div>
+    <div class="day-row" id="d-3-4">
+      <div class="day-left"><span class="day-name">Пт</span><span class="day-date">26.06</span><span class="day-tag tg-vocab">словарь</span></div>
       <div class="day-content">
         <p class="topic-name">Повторение + Reverso</p>
         <p class="topic-desc">Тест по словам эмоций, 5 слов в контексте</p>
@@ -601,10 +602,10 @@
           <a class="lnk lnk-green" href="https://context.reverso.net" target="_blank">Reverso Context</a>
         </div>
       </div>
-      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="checkbox" onclick="toggle(this.closest('.day-row'))"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     </div>
-    <div class="day-row" onclick="toggle(this)" id="d-3-5">
-      <div class="day-left"><span class="day-name">Сб</span><span class="day-tag tg-pron">произн.</span></div>
+    <div class="day-row" id="d-3-5">
+      <div class="day-left"><span class="day-name">Сб</span><span class="day-date">27.06</span><span class="day-tag tg-pron">произн.</span></div>
       <div class="day-content">
         <p class="topic-name">Слова эмоций на Forvo</p>
         <p class="topic-desc">Все 10 слов. Особое внимание: frustrated, relieved, overwhelmed</p>
@@ -612,10 +613,10 @@
           <a class="lnk lnk-amber" href="https://ru.forvo.com" target="_blank">Forvo</a>
         </div>
       </div>
-      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="checkbox" onclick="toggle(this.closest('.day-row'))"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     </div>
-    <div class="day-row" onclick="toggle(this)" id="d-3-6">
-      <div class="day-left"><span class="day-name">Вс</span><span class="day-tag tg-mix">повтор.</span></div>
+    <div class="day-row" id="d-3-6">
+      <div class="day-left"><span class="day-name">Вс</span><span class="day-date">28.06</span><span class="day-tag tg-mix">повтор.</span></div>
       <div class="day-content">
         <p class="topic-name">Итог: модальные глаголы</p>
         <p class="topic-desc">3 предложения с must have / could have / should have. Quizlet: финал</p>
@@ -623,7 +624,7 @@
           <a class="lnk lnk-green" href="https://quizlet.com" target="_blank">Quizlet — финал</a>
         </div>
       </div>
-      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="checkbox" onclick="toggle(this.closest('.day-row'))"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     </div>
   </div>
 </div>
@@ -633,8 +634,8 @@
   <p class="week-label">Неделя 3 — Passive Voice</p>
   <p class="week-progress" id="wp-4"></p>
   <div class="day-card">
-    <div class="day-row" onclick="toggle(this)" id="d-4-0">
-      <div class="day-left"><span class="day-name">Пн</span><span class="day-tag tg-gram">грамм.</span></div>
+    <div class="day-row" id="d-4-0">
+      <div class="day-left"><span class="day-name">Пн</span><span class="day-date">29.06</span><span class="day-tag tg-gram">грамм.</span></div>
       <div class="day-content">
         <p class="topic-name">Passive: Present &amp; Past</p>
         <p class="topic-desc">It is made / was made / has been made — страдательный залог</p>
@@ -644,10 +645,10 @@
           <a class="lnk lnk-blue" href="https://www.perfect-english-grammar.com/passive-voice-exercise-2.html" target="_blank">Упражнение 2</a>
         </div>
       </div>
-      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="checkbox" onclick="toggle(this.closest('.day-row'))"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     </div>
-    <div class="day-row" onclick="toggle(this)" id="d-4-1">
-      <div class="day-left"><span class="day-name">Вт</span><span class="day-tag tg-vocab">словарь</span></div>
+    <div class="day-row" id="d-4-1">
+      <div class="day-left"><span class="day-name">Вт</span><span class="day-date">30.06</span><span class="day-tag tg-vocab">словарь</span></div>
       <div class="day-content">
         <p class="topic-name">10 слов: технологии и интернет</p>
         <p class="topic-desc">Quizlet: сет "technology internet vocabulary B2"</p>
@@ -655,10 +656,10 @@
           <a class="lnk lnk-green" href="https://quizlet.com/search?query=technology+internet+vocabulary+b2&type=sets" target="_blank">Quizlet → сет</a>
         </div>
       </div>
-      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="checkbox" onclick="toggle(this.closest('.day-row'))"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     </div>
-    <div class="day-row" onclick="toggle(this)" id="d-4-2">
-      <div class="day-left"><span class="day-name">Ср</span><span class="day-tag tg-pron">произн.</span></div>
+    <div class="day-row" id="d-4-2">
+      <div class="day-left"><span class="day-name">Ср</span><span class="day-date">01.07</span><span class="day-tag tg-pron">произн.</span></div>
       <div class="day-content">
         <p class="topic-name">Слова технологий на YouGlish</p>
         <p class="topic-desc">algorithm, data, privacy — как произносят в реальных видео</p>
@@ -666,10 +667,10 @@
           <a class="lnk lnk-amber" href="https://youglish.com" target="_blank">YouGlish</a>
         </div>
       </div>
-      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="checkbox" onclick="toggle(this.closest('.day-row'))"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     </div>
-    <div class="day-row" onclick="toggle(this)" id="d-4-3">
-      <div class="day-left"><span class="day-name">Чт</span><span class="day-tag tg-gram">грамм.</span></div>
+    <div class="day-row" id="d-4-3">
+      <div class="day-left"><span class="day-name">Чт</span><span class="day-date">02.07</span><span class="day-tag tg-gram">грамм.</span></div>
       <div class="day-content">
         <p class="topic-name">Passive: Future &amp; Modal</p>
         <p class="topic-desc">It will be done / should be checked / might be delayed</p>
@@ -678,10 +679,10 @@
           <a class="lnk lnk-blue" href="https://www.perfect-english-grammar.com/passive-voice-exercise-4.html" target="_blank">Упражнение 4</a>
         </div>
       </div>
-      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="checkbox" onclick="toggle(this.closest('.day-row'))"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     </div>
-    <div class="day-row" onclick="toggle(this)" id="d-4-4">
-      <div class="day-left"><span class="day-name">Пт</span><span class="day-tag tg-vocab">словарь</span></div>
+    <div class="day-row" id="d-4-4">
+      <div class="day-left"><span class="day-name">Пт</span><span class="day-date">03.07</span><span class="day-tag tg-vocab">словарь</span></div>
       <div class="day-content">
         <p class="topic-name">Повторение + Reverso</p>
         <p class="topic-desc">Тест в Quizlet, 5 технологических слов на Reverso</p>
@@ -690,10 +691,10 @@
           <a class="lnk lnk-green" href="https://context.reverso.net" target="_blank">Reverso Context</a>
         </div>
       </div>
-      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="checkbox" onclick="toggle(this.closest('.day-row'))"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     </div>
-    <div class="day-row" onclick="toggle(this)" id="d-4-5">
-      <div class="day-left"><span class="day-name">Сб</span><span class="day-tag tg-pron">произн.</span></div>
+    <div class="day-row" id="d-4-5">
+      <div class="day-left"><span class="day-name">Сб</span><span class="day-date">04.07</span><span class="day-tag tg-pron">произн.</span></div>
       <div class="day-content">
         <p class="topic-name">Forvo + запись себя</p>
         <p class="topic-desc">Прослушай все 10 слов, запиши себя на телефон, сравни</p>
@@ -701,10 +702,10 @@
           <a class="lnk lnk-amber" href="https://ru.forvo.com" target="_blank">Forvo</a>
         </div>
       </div>
-      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="checkbox" onclick="toggle(this.closest('.day-row'))"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     </div>
-    <div class="day-row" onclick="toggle(this)" id="d-4-6">
-      <div class="day-left"><span class="day-name">Вс</span><span class="day-tag tg-mix">повтор.</span></div>
+    <div class="day-row" id="d-4-6">
+      <div class="day-left"><span class="day-name">Вс</span><span class="day-date">05.07</span><span class="day-tag tg-mix">повтор.</span></div>
       <div class="day-content">
         <p class="topic-name">Итог: Passive Voice</p>
         <p class="topic-desc">3 предложения в passive про новости или работу. Quizlet: финал</p>
@@ -712,7 +713,7 @@
           <a class="lnk lnk-green" href="https://quizlet.com" target="_blank">Quizlet — финал</a>
         </div>
       </div>
-      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="checkbox" onclick="toggle(this.closest('.day-row'))"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     </div>
   </div>
 </div>
@@ -722,8 +723,8 @@
   <p class="week-label">Неделя 3 — Reported Speech</p>
   <p class="week-progress" id="wp-5"></p>
   <div class="day-card">
-    <div class="day-row" onclick="toggle(this)" id="d-5-0">
-      <div class="day-left"><span class="day-name">Пн</span><span class="day-tag tg-gram">грамм.</span></div>
+    <div class="day-row" id="d-5-0">
+      <div class="day-left"><span class="day-name">Пн</span><span class="day-date">06.07</span><span class="day-tag tg-gram">грамм.</span></div>
       <div class="day-content">
         <p class="topic-name">Reported statements &amp; questions</p>
         <p class="topic-desc">She said she was tired. He asked if I knew.</p>
@@ -733,10 +734,10 @@
           <a class="lnk lnk-blue" href="https://www.perfect-english-grammar.com/reported-questions-exercise-1.html" target="_blank">Вопросы</a>
         </div>
       </div>
-      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="checkbox" onclick="toggle(this.closest('.day-row'))"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     </div>
-    <div class="day-row" onclick="toggle(this)" id="d-5-1">
-      <div class="day-left"><span class="day-name">Вт</span><span class="day-tag tg-vocab">словарь</span></div>
+    <div class="day-row" id="d-5-1">
+      <div class="day-left"><span class="day-name">Вт</span><span class="day-date">07.07</span><span class="day-tag tg-vocab">словарь</span></div>
       <div class="day-content">
         <p class="topic-name">10 слов: природа и окружающая среда</p>
         <p class="topic-desc">Quizlet: сет "environment nature vocabulary B2"</p>
@@ -744,10 +745,10 @@
           <a class="lnk lnk-green" href="https://quizlet.com/search?query=environment+nature+b2+vocabulary&type=sets" target="_blank">Quizlet → сет</a>
         </div>
       </div>
-      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="checkbox" onclick="toggle(this.closest('.day-row'))"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     </div>
-    <div class="day-row" onclick="toggle(this)" id="d-5-2">
-      <div class="day-left"><span class="day-name">Ср</span><span class="day-tag tg-pron">произн.</span></div>
+    <div class="day-row" id="d-5-2">
+      <div class="day-left"><span class="day-name">Ср</span><span class="day-date">08.07</span><span class="day-tag tg-pron">произн.</span></div>
       <div class="day-content">
         <p class="topic-name">Интонация при пересказе</p>
         <p class="topic-desc">YouGlish: "she told me that" — как меняется интонация в косвенной речи</p>
@@ -755,10 +756,10 @@
           <a class="lnk lnk-amber" href="https://youglish.com" target="_blank">YouGlish</a>
         </div>
       </div>
-      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="checkbox" onclick="toggle(this.closest('.day-row'))"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     </div>
-    <div class="day-row" onclick="toggle(this)" id="d-5-3">
-      <div class="day-left"><span class="day-name">Чт</span><span class="day-tag tg-gram">грамм.</span></div>
+    <div class="day-row" id="d-5-3">
+      <div class="day-left"><span class="day-name">Чт</span><span class="day-date">09.07</span><span class="day-tag tg-gram">грамм.</span></div>
       <div class="day-content">
         <p class="topic-name">Reported commands &amp; mixed</p>
         <p class="topic-desc">He told me to go. She said she had been waiting.</p>
@@ -767,10 +768,10 @@
           <a class="lnk lnk-blue" href="https://www.perfect-english-grammar.com/reported-speech-exercise-3.html" target="_blank">Упражнение 3</a>
         </div>
       </div>
-      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="checkbox" onclick="toggle(this.closest('.day-row'))"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     </div>
-    <div class="day-row" onclick="toggle(this)" id="d-5-4">
-      <div class="day-left"><span class="day-name">Пт</span><span class="day-tag tg-vocab">словарь</span></div>
+    <div class="day-row" id="d-5-4">
+      <div class="day-left"><span class="day-name">Пт</span><span class="day-date">10.07</span><span class="day-tag tg-vocab">словарь</span></div>
       <div class="day-content">
         <p class="topic-name">Повторение + Reverso</p>
         <p class="topic-desc">Тест по словам природы, 5 слов в контексте</p>
@@ -779,10 +780,10 @@
           <a class="lnk lnk-green" href="https://context.reverso.net" target="_blank">Reverso Context</a>
         </div>
       </div>
-      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="checkbox" onclick="toggle(this.closest('.day-row'))"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     </div>
-    <div class="day-row" onclick="toggle(this)" id="d-5-5">
-      <div class="day-left"><span class="day-name">Сб</span><span class="day-tag tg-pron">произн.</span></div>
+    <div class="day-row" id="d-5-5">
+      <div class="day-left"><span class="day-name">Сб</span><span class="day-date">11.07</span><span class="day-tag tg-pron">произн.</span></div>
       <div class="day-content">
         <p class="topic-name">Forvo: слова природы</p>
         <p class="topic-desc">Особое внимание: drought, environment, sustainable</p>
@@ -790,10 +791,10 @@
           <a class="lnk lnk-amber" href="https://ru.forvo.com" target="_blank">Forvo</a>
         </div>
       </div>
-      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="checkbox" onclick="toggle(this.closest('.day-row'))"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     </div>
-    <div class="day-row" onclick="toggle(this)" id="d-5-6">
-      <div class="day-left"><span class="day-name">Вс</span><span class="day-tag tg-mix">повтор.</span></div>
+    <div class="day-row" id="d-5-6">
+      <div class="day-left"><span class="day-name">Вс</span><span class="day-date">12.07</span><span class="day-tag tg-mix">повтор.</span></div>
       <div class="day-content">
         <p class="topic-name">Итог: Reported Speech</p>
         <p class="topic-desc">Перескажи 3 фразы из разговора этой недели в косвенной речи</p>
@@ -801,7 +802,7 @@
           <a class="lnk lnk-green" href="https://quizlet.com" target="_blank">Quizlet — финал</a>
         </div>
       </div>
-      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="checkbox" onclick="toggle(this.closest('.day-row'))"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     </div>
   </div>
 </div>
@@ -811,8 +812,8 @@
   <p class="week-label">Неделя 4 — Артикли &amp; существительные</p>
   <p class="week-progress" id="wp-6"></p>
   <div class="day-card">
-    <div class="day-row" onclick="toggle(this)" id="d-6-0">
-      <div class="day-left"><span class="day-name">Пн</span><span class="day-tag tg-gram">грамм.</span></div>
+    <div class="day-row" id="d-6-0">
+      <div class="day-left"><span class="day-name">Пн</span><span class="day-date">13.07</span><span class="day-tag tg-gram">грамм.</span></div>
       <div class="day-content">
         <p class="topic-name">A / An / The / — (zero article)</p>
         <p class="topic-desc">The sun, a cat, — music, — love — логика артиклей</p>
@@ -822,10 +823,10 @@
           <a class="lnk lnk-blue" href="https://www.perfect-english-grammar.com/articles-exercise-2.html" target="_blank">Упражнение 2</a>
         </div>
       </div>
-      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="checkbox" onclick="toggle(this.closest('.day-row'))"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     </div>
-    <div class="day-row" onclick="toggle(this)" id="d-6-1">
-      <div class="day-left"><span class="day-name">Вт</span><span class="day-tag tg-vocab">словарь</span></div>
+    <div class="day-row" id="d-6-1">
+      <div class="day-left"><span class="day-name">Вт</span><span class="day-date">14.07</span><span class="day-tag tg-vocab">словарь</span></div>
       <div class="day-content">
         <p class="topic-name">10 слов: путешествия и места</p>
         <p class="topic-desc">Quizlet: сет "travel places vocabulary B2"</p>
@@ -833,10 +834,10 @@
           <a class="lnk lnk-green" href="https://quizlet.com/search?query=travel+places+vocabulary+b2&type=sets" target="_blank">Quizlet → сет</a>
         </div>
       </div>
-      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="checkbox" onclick="toggle(this.closest('.day-row'))"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     </div>
-    <div class="day-row" onclick="toggle(this)" id="d-6-2">
-      <div class="day-left"><span class="day-name">Ср</span><span class="day-tag tg-pron">произн.</span></div>
+    <div class="day-row" id="d-6-2">
+      <div class="day-left"><span class="day-name">Ср</span><span class="day-date">15.07</span><span class="day-tag tg-pron">произн.</span></div>
       <div class="day-content">
         <p class="topic-name">«The» — два произношения</p>
         <p class="topic-desc">YouGlish: "the apple" vs "the car" — слушай /ðə/ и /ði/ перед гласной</p>
@@ -844,10 +845,10 @@
           <a class="lnk lnk-amber" href="https://youglish.com" target="_blank">YouGlish</a>
         </div>
       </div>
-      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="checkbox" onclick="toggle(this.closest('.day-row'))"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     </div>
-    <div class="day-row" onclick="toggle(this)" id="d-6-3">
-      <div class="day-left"><span class="day-name">Чт</span><span class="day-tag tg-gram">грамм.</span></div>
+    <div class="day-row" id="d-6-3">
+      <div class="day-left"><span class="day-name">Чт</span><span class="day-date">16.07</span><span class="day-tag tg-gram">грамм.</span></div>
       <div class="day-content">
         <p class="topic-name">Countable vs Uncountable</p>
         <p class="topic-desc">Much / many / a little / a few / a lot of — логика выбора</p>
@@ -857,10 +858,10 @@
           <a class="lnk lnk-blue" href="https://www.perfect-english-grammar.com/a-few-a-little-exercise-1.html" target="_blank">Few/Little</a>
         </div>
       </div>
-      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="checkbox" onclick="toggle(this.closest('.day-row'))"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     </div>
-    <div class="day-row" onclick="toggle(this)" id="d-6-4">
-      <div class="day-left"><span class="day-name">Пт</span><span class="day-tag tg-vocab">словарь</span></div>
+    <div class="day-row" id="d-6-4">
+      <div class="day-left"><span class="day-name">Пт</span><span class="day-date">17.07</span><span class="day-tag tg-vocab">словарь</span></div>
       <div class="day-content">
         <p class="topic-name">Повторение + Reverso</p>
         <p class="topic-desc">Тест по словам путешествий, 5 слов в контексте</p>
@@ -869,10 +870,10 @@
           <a class="lnk lnk-green" href="https://context.reverso.net" target="_blank">Reverso Context</a>
         </div>
       </div>
-      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="checkbox" onclick="toggle(this.closest('.day-row'))"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     </div>
-    <div class="day-row" onclick="toggle(this)" id="d-6-5">
-      <div class="day-left"><span class="day-name">Сб</span><span class="day-tag tg-pron">произн.</span></div>
+    <div class="day-row" id="d-6-5">
+      <div class="day-left"><span class="day-name">Сб</span><span class="day-date">18.07</span><span class="day-tag tg-pron">произн.</span></div>
       <div class="day-content">
         <p class="topic-name">Forvo: слова недели</p>
         <p class="topic-desc">Особое внимание: itinerary, destination, accommodation</p>
@@ -880,10 +881,10 @@
           <a class="lnk lnk-amber" href="https://ru.forvo.com" target="_blank">Forvo</a>
         </div>
       </div>
-      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="checkbox" onclick="toggle(this.closest('.day-row'))"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     </div>
-    <div class="day-row" onclick="toggle(this)" id="d-6-6">
-      <div class="day-left"><span class="day-name">Вс</span><span class="day-tag tg-mix">повтор.</span></div>
+    <div class="day-row" id="d-6-6">
+      <div class="day-left"><span class="day-name">Вс</span><span class="day-date">19.07</span><span class="day-tag tg-mix">повтор.</span></div>
       <div class="day-content">
         <p class="topic-name">Итог: артикли</p>
         <p class="topic-desc">5 предложений о своём городе, осознанно используя the/a/—</p>
@@ -891,7 +892,7 @@
           <a class="lnk lnk-green" href="https://quizlet.com" target="_blank">Quizlet — финал</a>
         </div>
       </div>
-      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="checkbox" onclick="toggle(this.closest('.day-row'))"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     </div>
   </div>
 </div>
@@ -901,8 +902,8 @@
   <p class="week-label">Неделя 4 — Relative Clauses</p>
   <p class="week-progress" id="wp-7"></p>
   <div class="day-card">
-    <div class="day-row" onclick="toggle(this)" id="d-7-0">
-      <div class="day-left"><span class="day-name">Пн</span><span class="day-tag tg-gram">грамм.</span></div>
+    <div class="day-row" id="d-7-0">
+      <div class="day-left"><span class="day-name">Пн</span><span class="day-date">20.07</span><span class="day-tag tg-gram">грамм.</span></div>
       <div class="day-content">
         <p class="topic-name">Defining relative clauses</p>
         <p class="topic-desc">The man who called / the book that I read — без запятых</p>
@@ -911,10 +912,10 @@
           <a class="lnk lnk-blue" href="https://www.perfect-english-grammar.com/relative-clauses-exercise-1.html" target="_blank">Упражнение 1</a>
         </div>
       </div>
-      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="checkbox" onclick="toggle(this.closest('.day-row'))"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     </div>
-    <div class="day-row" onclick="toggle(this)" id="d-7-1">
-      <div class="day-left"><span class="day-name">Вт</span><span class="day-tag tg-vocab">словарь</span></div>
+    <div class="day-row" id="d-7-1">
+      <div class="day-left"><span class="day-name">Вт</span><span class="day-date">21.07</span><span class="day-tag tg-vocab">словарь</span></div>
       <div class="day-content">
         <p class="topic-name">10 слов: здоровье и образ жизни</p>
         <p class="topic-desc">Quizlet: сет "health lifestyle vocabulary B2"</p>
@@ -922,10 +923,10 @@
           <a class="lnk lnk-green" href="https://quizlet.com/search?query=health+lifestyle+b2+vocabulary&type=sets" target="_blank">Quizlet → сет</a>
         </div>
       </div>
-      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="checkbox" onclick="toggle(this.closest('.day-row'))"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     </div>
-    <div class="day-row" onclick="toggle(this)" id="d-7-2">
-      <div class="day-left"><span class="day-name">Ср</span><span class="day-tag tg-pron">произн.</span></div>
+    <div class="day-row" id="d-7-2">
+      <div class="day-left"><span class="day-name">Ср</span><span class="day-date">22.07</span><span class="day-tag tg-pron">произн.</span></div>
       <div class="day-content">
         <p class="topic-name">Слова здоровья на YouGlish</p>
         <p class="topic-desc">symptoms, diagnosis, well-being — слушай в реальных контекстах</p>
@@ -933,10 +934,10 @@
           <a class="lnk lnk-amber" href="https://youglish.com" target="_blank">YouGlish</a>
         </div>
       </div>
-      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="checkbox" onclick="toggle(this.closest('.day-row'))"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     </div>
-    <div class="day-row" onclick="toggle(this)" id="d-7-3">
-      <div class="day-left"><span class="day-name">Чт</span><span class="day-tag tg-gram">грамм.</span></div>
+    <div class="day-row" id="d-7-3">
+      <div class="day-left"><span class="day-name">Чт</span><span class="day-date">23.07</span><span class="day-tag tg-gram">грамм.</span></div>
       <div class="day-content">
         <p class="topic-name">Non-defining relative clauses</p>
         <p class="topic-desc">My friend, who lives in London, said... — с запятыми</p>
@@ -945,10 +946,10 @@
           <a class="lnk lnk-blue" href="https://www.perfect-english-grammar.com/relative-clauses-exercise-3.html" target="_blank">Упражнение 3</a>
         </div>
       </div>
-      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="checkbox" onclick="toggle(this.closest('.day-row'))"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     </div>
-    <div class="day-row" onclick="toggle(this)" id="d-7-4">
-      <div class="day-left"><span class="day-name">Пт</span><span class="day-tag tg-vocab">словарь</span></div>
+    <div class="day-row" id="d-7-4">
+      <div class="day-left"><span class="day-name">Пт</span><span class="day-date">24.07</span><span class="day-tag tg-vocab">словарь</span></div>
       <div class="day-content">
         <p class="topic-name">Финальный тест + Reverso</p>
         <p class="topic-desc">Тест по словам здоровья, 5 слов в предложениях</p>
@@ -957,10 +958,10 @@
           <a class="lnk lnk-green" href="https://context.reverso.net" target="_blank">Reverso Context</a>
         </div>
       </div>
-      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="checkbox" onclick="toggle(this.closest('.day-row'))"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     </div>
-    <div class="day-row" onclick="toggle(this)" id="d-7-5">
-      <div class="day-left"><span class="day-name">Сб</span><span class="day-tag tg-pron">произн.</span></div>
+    <div class="day-row" id="d-7-5">
+      <div class="day-left"><span class="day-name">Сб</span><span class="day-date">25.07</span><span class="day-tag tg-pron">произн.</span></div>
       <div class="day-content">
         <p class="topic-name">Forvo: финальный прогон</p>
         <p class="topic-desc">Прослушай слова недели. Запиши себя — сравни с первой неделей!</p>
@@ -968,10 +969,10 @@
           <a class="lnk lnk-amber" href="https://ru.forvo.com" target="_blank">Forvo</a>
         </div>
       </div>
-      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="checkbox" onclick="toggle(this.closest('.day-row'))"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     </div>
-    <div class="day-row" onclick="toggle(this)" id="d-7-6">
-      <div class="day-left"><span class="day-name">Вс</span><span class="day-tag tg-mix">🎉 финал</span></div>
+    <div class="day-row" id="d-7-6">
+      <div class="day-left"><span class="day-name">Вс</span><span class="day-date">26.07</span><span class="day-tag tg-mix">🎉 финал</span></div>
       <div class="day-content">
         <p class="topic-name">Итог всего месяца!</p>
         <p class="topic-desc">5 предложений с relative clauses + слова месяца. Ты прошла все 8 тем!</p>
@@ -979,7 +980,7 @@
           <a class="lnk lnk-green" href="https://quizlet.com" target="_blank">Quizlet — финал</a>
         </div>
       </div>
-      <div class="checkbox"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="checkbox" onclick="toggle(this.closest('.day-row'))"><svg class="checkbox-tick" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     </div>
   </div>
 </div>
